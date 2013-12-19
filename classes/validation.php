@@ -1017,7 +1017,9 @@ class Validation
 		{
 			if ($format)
 			{
-				return date($format, mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $parsed['month'], $parsed['day'], $parsed['year']));
+				// add check if month / day are empty. for when validating just a year.
+				return date($format, mktime($parsed['hour'], $parsed['minute'], $parsed['second'], (!empty($parsed['month'])?$parsed['month']:1), (!empty($parsed['day'])?$parsed['day']:1), $parsed['year']));
+				// return date($format, mktime($parsed['hour'], $parsed['minute'], $parsed['second'], $parsed['month'], $parsed['day'], $parsed['year']));
 			}
 			else
 			{
